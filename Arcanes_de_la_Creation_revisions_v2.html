@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Arcanes de la Création — Fiches de révision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1815;
+  --ink-card:#232019;
+  --ink-card-2:#29251d;
+  --paper:#ece4d4;
+  --paper-dim:#b7ae98;
+  --paper-faint:#8c8571;
+  --rule:#413c2f;
+  --rule-soft:#2c2921;
+
+  --gold:#c9a24c;
+  --gold-soft:rgba(201,162,76,.13);
+  --gold-line:rgba(201,162,76,.35);
+
+  --verdigris:#83a98c;
+  --verdigris-soft:rgba(131,169,140,.13);
+  --verdigris-line:rgba(131,169,140,.35);
+
+  --plum:#ab8fb5;
+  --plum-soft:rgba(171,143,181,.13);
+  --plum-line:rgba(171,143,181,.35);
+
+  --accent:var(--gold);
+  --accent-soft:var(--gold-soft);
+  --accent-line:var(--gold-line);
+
+  --serif-display:'Fraunces', serif;
+  --serif-body:'Literata', serif;
+  --mono:'IBM Plex Mono', monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(255,255,255,.03), transparent 60%),
+    var(--ink);
+  color:var(--paper);
+  font-family:var(--serif-body);
+  font-size:16.5px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+::selection{ background:var(--accent-soft); color:var(--paper); }
+
+a{ color:inherit; }
+
+.wrap{ max-width:840px; margin:0 auto; padding:0 22px; }
+
+/* ---------- header / nav ---------- */
+header.top{
+  position:sticky; top:0; z-index:40;
+  background:rgba(26,24,21,.88);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--rule-soft);
+}
+.top-inner{
+  max-width:840px; margin:0 auto; padding:14px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+.brand{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--paper-dim); white-space:nowrap;
+}
+.brand b{ color:var(--paper); font-weight:600; }
+nav.tabs{ display:flex; gap:4px; }
+nav.tabs button{
+  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  background:none; border:1px solid transparent; color:var(--paper-dim);
+  padding:7px 12px; border-radius:20px; cursor:pointer;
+  display:flex; align-items:center; gap:7px;
+  transition:color .15s, border-color .15s, background .15s;
+}
+nav.tabs button .dot{
+  width:6px; height:6px; border-radius:50%; background:currentColor; opacity:.55;
+}
+nav.tabs button:hover{ color:var(--paper); }
+nav.tabs button[aria-current="true"]{
+  color:var(--ink); background:var(--tab-accent, var(--paper));
+  border-color:transparent;
+}
+nav.tabs button[aria-current="true"] .dot{ opacity:1; }
+nav.tabs button:focus-visible, .subnav a:focus-visible, .filterbox input:focus-visible, .seal:focus-visible{
+  outline:2px solid var(--paper); outline-offset:2px;
+}
+
+@media (max-width:640px){
+  .top-inner{ padding:12px 16px; gap:10px; }
+  .brand{ display:none; }
+  nav.tabs{ width:100%; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none; }
+  nav.tabs::-webkit-scrollbar{ display:none; }
+  nav.tabs button{ flex:0 0 auto; }
+}
+
+/* ---------- hero (home) ---------- */
+.hero{ padding:64px 0 30px; }
+.hero .eyebrow{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--paper-faint); margin-bottom:18px;
+}
+.hero h1{
+  font-family:var(--serif-display); font-weight:700; font-style:italic;
+  font-size:clamp(34px,7vw,58px); line-height:1.04; margin:0 0 20px;
+  letter-spacing:-.01em;
+}
+.hero h1 em{ font-style:normal; color:var(--gold); }
+.hero p.lead{
+  font-size:18px; color:var(--paper-dim); max-width:560px; margin:0 0 6px;
+}
+.hero .meta{ font-family:var(--mono); font-size:12px; color:var(--paper-faint); margin-top:14px; }
+
+/* ---------- seals (home cards) ---------- */
+.seals{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:38px 0 46px;
+}
+@media (max-width:720px){ .seals{ grid-template-columns:1fr; } }
+.seal{
+  --sc: var(--gold); --scs: var(--gold-soft); --scl:var(--gold-line);
+  display:block; text-align:left; cursor:pointer;
+  background:linear-gradient(160deg, var(--ink-card), var(--ink-card-2));
+  border:1px solid var(--rule); border-radius:14px;
+  padding:22px 20px 20px; position:relative; overflow:hidden;
+  transition:transform .18s ease, border-color .18s ease;
+}
+.seal:hover{ transform:translateY(-3px); border-color:var(--scl); }
+.seal::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px;
+  background:var(--sc);
+}
+.seal .num{ font-family:var(--mono); font-size:11px; color:var(--sc); letter-spacing:.12em; }
+.seal h3{
+  font-family:var(--serif-display); font-weight:700; font-size:23px; margin:10px 0 3px;
+  color:var(--paper);
+}
+.seal .who{ font-size:13.5px; color:var(--paper-dim); margin-bottom:12px; }
+.seal .thesis{ font-size:14px; color:var(--paper-dim); line-height:1.5; }
+.seal .go{ margin-top:16px; font-family:var(--mono); font-size:11px; color:var(--sc); letter-spacing:.08em; }
+
+.seal.s-platon{ --sc:var(--gold); --scs:var(--gold-soft); --scl:var(--gold-line); }
+.seal.s-zola{ --sc:var(--verdigris); --scs:var(--verdigris-soft); --scl:var(--verdigris-line); }
+.seal.s-woolf{ --sc:var(--plum); --scs:var(--plum-soft); --scl:var(--plum-line); }
+
+/* ---------- comparison table (home) ---------- */
+.compare{ margin:8px 0 60px; border:1px solid var(--rule); border-radius:14px; overflow:hidden; }
+.compare-head{
+  padding:16px 20px; border-bottom:1px solid var(--rule);
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--paper-faint);
+}
+table.artic{ width:100%; border-collapse:collapse; }
+table.artic th, table.artic td{ padding:14px 18px; text-align:left; vertical-align:top; border-bottom:1px solid var(--rule-soft); font-size:14.5px; }
+table.artic tr:last-child th, table.artic tr:last-child td{ border-bottom:none; }
+table.artic th{
+  font-family:var(--serif-display); font-weight:700; font-style:italic; font-size:17px; white-space:nowrap; width:120px;
+}
+table.artic td.q{ color:var(--paper-dim); width:220px; }
+table.artic td.t{ color:var(--paper); }
+tr.row-platon th{ color:var(--gold); }
+tr.row-zola th{ color:var(--verdigris); }
+tr.row-woolf th{ color:var(--plum); }
+
+.note-box{
+  margin:0 0 40px; padding:16px 18px; border-radius:10px;
+  background:var(--accent-soft); border:1px solid var(--accent-line);
+  font-size:14px; color:var(--paper-dim);
+}
+.note-box b{ color:var(--paper); }
+
+/* ---------- work page ---------- */
+.work-band{
+  padding:44px 0 26px; border-bottom:1px solid var(--rule-soft);
+}
+.work-band .kicker{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+.work-band h1{
+  font-family:var(--serif-display); font-weight:700; font-style:italic;
+  font-size:clamp(30px,6vw,46px); margin:0 0 8px; line-height:1.05;
+}
+.work-band .who{ color:var(--paper-dim); font-size:15px; margin-bottom:16px; }
+.work-band .thesis{ font-size:16.5px; max-width:600px; color:var(--paper); }
+.facts{ display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:20px; }
+.facts div{ font-size:12.5px; color:var(--paper-faint); }
+.facts b{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:3px; }
+
+.subnav{
+  position:sticky; top:57px; z-index:30;
+  background:rgba(26,24,21,.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule-soft);
+  overflow-x:auto; white-space:nowrap; -ms-overflow-style:none; scrollbar-width:none;
+}
+.subnav::-webkit-scrollbar{ display:none; }
+.subnav .in{ max-width:840px; margin:0 auto; padding:0 22px; display:flex; gap:2px; }
+.subnav a{
+  display:inline-block; font-family:var(--mono); font-size:12px; letter-spacing:.03em;
+  color:var(--paper-dim); text-decoration:none; padding:12px 14px; border-bottom:2px solid transparent;
+}
+.subnav a:hover{ color:var(--paper); border-color:var(--rule); }
+
+section.block{ padding:44px 0; border-bottom:1px solid var(--rule-soft); }
+section.block:last-of-type{ border-bottom:none; }
+section.block h2{
+  font-family:var(--serif-display); font-weight:700; font-size:26px; margin:0 0 6px;
+  display:flex; align-items:baseline; gap:10px;
+}
+section.block h2 .n{ font-family:var(--mono); font-size:13px; color:var(--accent); }
+section.block > .sub{ color:var(--paper-faint); font-size:13.5px; margin-bottom:26px; }
+
+.prose p{ margin:0 0 14px; color:var(--paper); }
+.prose p:last-child{ margin-bottom:0; }
+.prose strong{ color:var(--paper); }
+
+/* chapter accordions */
+.chap{
+  border:1px solid var(--rule); border-radius:12px; margin-bottom:10px;
+  background:var(--ink-card); overflow:hidden;
+}
+.chap summary{
+  list-style:none; cursor:pointer; padding:15px 18px;
+  display:flex; align-items:center; gap:14px;
+  font-family:var(--serif-display); font-size:16.5px; font-weight:600;
+}
+.chap summary::-webkit-details-marker{ display:none; }
+.chap summary .roman{
+  font-family:var(--mono); font-size:12px; color:var(--accent); flex:0 0 auto;
+  border:1px solid var(--accent-line); border-radius:20px; padding:3px 9px;
+}
+.chap summary .arrow{ margin-left:auto; color:var(--paper-faint); transition:transform .18s ease; font-size:13px; }
+.chap[open] summary .arrow{ transform:rotate(90deg); }
+.chap .chap-body{ padding:0 18px 20px 18px; }
+.chap .chap-body p{ color:var(--paper-dim); font-size:15px; margin:0 0 12px; }
+.chap .chap-body blockquote{
+  margin:14px 0 0; padding:10px 14px; border-left:2px solid var(--accent);
+  color:var(--paper); font-style:italic; font-size:14.5px; background:var(--accent-soft); border-radius:0 8px 8px 0;
+}
+
+/* citations par chapitre */
+.cits{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--rule); }
+.cits-h{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+.cit{ background:var(--ink-card-2); border:1px solid var(--rule-soft); border-left:2px solid var(--accent); border-radius:0 10px 10px 0; padding:14px 16px; margin-bottom:10px; }
+.cit:last-child{ margin-bottom:0; }
+.cit-tag{ font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--paper-faint); margin-bottom:7px; }
+.cit-cv .cit-tag{ color:var(--gold); }
+.cit-q{ font-family:var(--serif-display); font-size:16px; line-height:1.45; color:var(--paper); }
+.cit-c .cit-q, .cit-cv .cit-q{ font-style:italic; }
+.cit-i .cit-q{ font-family:var(--serif-body); font-size:14.5px; }
+.chap .chap-body .cit-ctx{ font-size:13.5px; color:var(--paper-dim); margin:9px 0 6px; line-height:1.55; }
+.cit-ctx b, .cit-k b{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--paper-faint); margin-right:6px; font-weight:500; }
+.cit-k{ font-size:13.5px; color:var(--paper); background:var(--accent-soft); border-radius:6px; padding:6px 10px; display:inline-block; }
+.cit-ref{ margin-top:8px; font-family:var(--mono); font-size:11px; color:var(--paper-faint); }
+
+/* axes */
+.axes{ display:grid; gap:12px; }
+.axis{
+  border:1px solid var(--rule); border-radius:12px; padding:18px 20px;
+  background:var(--ink-card);
+}
+.axis .letter{
+  font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase;
+}
+.axis h3{ font-family:var(--serif-display); font-size:17px; font-weight:600; margin:5px 0 8px; }
+.axis p{ font-size:14.5px; color:var(--paper-dim); margin:0; }
+
+/* citations */
+.filterbox{ margin-bottom:22px; }
+.filterbox input{
+  width:100%; background:var(--ink-card); border:1px solid var(--rule); border-radius:10px;
+  padding:11px 14px; color:var(--paper); font-family:var(--serif-body); font-size:14.5px;
+}
+.filterbox input::placeholder{ color:var(--paper-faint); }
+.qgrid{ display:grid; gap:12px; }
+.qcard{
+  border:1px solid var(--rule); border-radius:12px; padding:20px 22px;
+  background:var(--ink-card); position:relative;
+}
+.qcard .theme{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+.qcard .qtext{
+  font-family:var(--serif-display); font-style:italic; font-size:17px; line-height:1.45; color:var(--paper);
+}
+.qcard .ref{ margin-top:12px; font-family:var(--mono); font-size:11.5px; color:var(--paper-faint); }
+.qcard .tag{ display:inline-block; font-family:var(--mono); font-size:10px; padding:2px 7px; border-radius:20px; border:1px solid var(--rule); color:var(--paper-dim); margin-left:8px; }
+.qcard[hidden]{ display:none; }
+.no-results{ color:var(--paper-faint); font-size:14px; padding:20px 0; display:none; }
+
+/* repere list / timeline */
+.reperes{ display:grid; gap:0; border-left:1px solid var(--rule); margin-left:6px; }
+.repere{ position:relative; padding:0 0 22px 26px; }
+.repere:last-child{ padding-bottom:0; }
+.repere::before{
+  content:""; position:absolute; left:-5px; top:5px; width:9px; height:9px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--ink);
+}
+.repere .when{ font-family:var(--mono); font-size:12px; color:var(--accent); margin-bottom:3px; }
+.repere .what{ font-size:14.5px; color:var(--paper-dim); }
+
+/* glossary table */
+table.gloss{ width:100%; border-collapse:collapse; }
+table.gloss td{ padding:12px 14px; border-bottom:1px solid var(--rule-soft); font-size:14px; vertical-align:top; }
+table.gloss td:first-child{ font-family:var(--serif-display); font-style:italic; font-weight:600; color:var(--accent); white-space:nowrap; width:170px; }
+table.gloss tr:last-child td{ border-bottom:none; }
+
+/* people table (Woolf) */
+table.people{ width:100%; border-collapse:collapse; }
+table.people td{ padding:12px 14px; border-bottom:1px solid var(--rule-soft); font-size:14px; vertical-align:top; }
+table.people td:first-child{ font-weight:600; color:var(--paper); width:170px; }
+table.people td:nth-child(2){ color:var(--accent); font-family:var(--mono); font-size:11px; white-space:nowrap; width:110px; }
+table.people tr:last-child td{ border-bottom:none; }
+
+.subheading{
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--paper-faint); margin:34px 0 14px;
+}
+.subheading:first-child{ margin-top:0; }
+
+footer.site{ padding:40px 0 70px; text-align:center; }
+footer.site p{ font-family:var(--mono); font-size:11.5px; color:var(--paper-faint); line-height:1.7; max-width:480px; margin:0 auto; }
+
+@media (max-width:640px){
+  .facts{ gap:10px 16px; }
+  section.block{ padding:34px 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">Les <b>Arcanes</b> de la Création · Fiches</div>
+    <nav class="tabs" id="tabs" aria-label="Navigation principale"></nav>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<footer class="site">
+  <p>Fiches réalisées à partir des trois œuvres au programme (domaine public) et de plusieurs analyses. Vérifie toujours les citations mot pour mot dans tes éditions prescrites avant de les utiliser en dissertation.</p>
+</footer>
+
+<script>
+/* ============================= DATA ============================= */
+
+const OVERVIEW = {
+  compare: [
+    {work:'platon', label:'Platon', q:"D'où vient la création ?", t:"Inspiration divine, possession extérieure au créateur — le poète ne sait rien, il est traversé par une force qui n'est pas la sienne."},
+    {work:'zola', label:'Zola', q:'Que coûte la création ?', t:"Épuisement, lutte intérieure, échec — Claude Lantier se détruit à vouloir accoucher d'un génie qu'il ne maîtrise jamais tout à fait."},
+    {work:'woolf', label:'Woolf', q:'À quelles conditions peut-on créer ?', t:"Argent, espace, solitude protégée — la création n'est jamais une pure affaire de talent individuel, mais de conditions matérielles et sociales."},
+  ]
+};
+
+const PLATON = {
+  key:'platon', accentVar:'--gold', label:'Platon', workTitle:'Ion & La République (Livre X)',
+  who:'Platon (v. 428–348 av. J.-C.)',
+  thesis:"Le poète est un médiateur inspiré par les Muses, sans savoir réel ; la création artistique est suspecte philosophiquement car elle imite l'apparence, pas la vérité.",
+  facts:[
+    ['Genre','Dialogues philosophiques'],
+    ['Édition du programme','GF Flammarion — trad. M. Canto-Sperber (Ion) & G. Leroux (République)'],
+    ['Périmètre','Ion en entier · République, Livre X, 595a–608b uniquement'],
+  ],
+  subnav:[['presentation','Présentation'],['ion','Ion'],['republique','République X'],['axes','Axes'],['citations','Citations'],['concepts','Concepts'],['reperes','Repères']],
+
+  presentation:`
+    <p><b>Ion</b> est un dialogue de jeunesse, bref, à forme ouverte : Socrate y démonte pièce par pièce la prétention d'un rhapsode à posséder un art véritable.</p>
+    <p><b>La République</b> est une œuvre de maturité en dix livres, consacrée à la définition de la justice et à la cité idéale. Le Livre X en constitue la conclusion, où Platon revient sur la question de la poésie déjà abordée au Livre III — <b>seul l'extrait 595a–608b est au programme</b> : la critique de la poésie mimétique, pas la suite du livre (immortalité de l'âme à partir de 608c, mythe d'Er à partir de 614a).</p>
+    <p><b>Anecdote utile :</b> selon Diogène Laërce, le jeune Platon composait lui-même des poèmes avant de brûler ses écrits pour se consacrer à la philosophie après avoir entendu Socrate — la critique de la poésie est aussi, en un sens, le récit d'un renoncement personnel.</p>
+  `,
+
+  ion:[
+    {n:'Prologue', t:'530a–530d', h:"Une rencontre après la victoire", p:"Socrate croise Ion d'Éphèse, rhapsode professionnel (récitant et interprète spécialisé d'Homère), qui revient d'un concours à Épidaure (fêtes d'Asclépios) où il vient d'être couronné. Socrate loue avec une ironie polie l'apparence brillante et la vie enviable des rhapsodes."},
+    {n:'I', t:'530d–532b', h:'Le problème posé', p:"Socrate demande si le talent d'Ion porte seulement sur Homère, ou aussi sur d'autres poètes comme Hésiode ou Archiloque, qui traitent souvent des mêmes sujets. Ion répond qu'il n'excelle que sur Homère — et se montre même incapable de bien parler des autres."},
+    {n:'II', t:'532b–533c', h:"L'universalité d'un art véritable", p:"Socrate établit que tout art véritable (technê) — peinture, sculpture, musique, arithmétique — porte sur un domaine entier et cohérent : celui qui sait juger un peintre sait juger tous les peintres. Si le talent d'Ion pour parler d'Homère relevait d'un art, il devrait donc s'étendre à tous les poètes traitant des mêmes sujets. Son incapacité à parler des autres poètes prouve que ce n'est pas un art qui l'anime."},
+    {n:'III', t:'533c–536d', h:'La possession divine et la chaîne magnétique', p:"Socrate développe alors sa propre explication : ce qui rend Ion capable de bien parler d'Homère n'est pas un savoir technique mais une puissance divine (theia dynamis). Il convoque l'image restée célèbre de la pierre d'aimant (pierre de Magnésie / pierre d'Héraclée) : cette pierre n'attire pas seulement les anneaux de fer, elle leur transmet elle-même sa force d'attraction, si bien qu'ils peuvent à leur tour attirer d'autres anneaux — formant une chaîne entière. De la même façon, la Muse rend le poète entheos (« habité par le dieu »), et de proche en proche, à travers le rhapsode, cette possession (enthousiasme) se transmet jusqu'au spectateur. Le rhapsode est ainsi un « interprète d'interprète », placé à un troisième maillon de la source divine. Ion confirme lui-même son propre état de possession : réciter certains passages pathétiques le fait littéralement pleurer et lui hérisse les cheveux.", q:"Tous les bons poètes épiques ne composent pas en vertu d'un art, mais parce qu'ils sont inspirés et possédés. […] Ce qui les fait dire de si belles choses, ce n'est pas un art, c'est un don des dieux.", qref:'Ion, 533e–534a'},
+    {n:'IV', t:'536d–541e', h:'Retour à l\u2019examen technique', p:"Socrate revient au concret : il interroge Ion sur des passages d'Homère traitant de domaines techniques précis — la médecine, la conduite d'un char, la pêche, la divination, l'art militaire. À chaque fois, Ion doit admettre qu'un spécialiste du domaine jugerait mieux que lui la justesse de ces passages. Poussé dans ses retranchements, Ion finit par prétendre qu'il ferait un excellent général grâce à sa connaissance des passages homériques sur la stratégie — ce que Socrate tourne en dérision : pourquoi alors n'est-il que rhapsode, et ne commande-t-il pas plutôt des armées ?"},
+    {n:'Épilogue', t:'541e–542b', h:'Divin ou injuste : le dilemme final', p:"Socrate propose à Ion un dilemme : soit il possède réellement un art et un savoir sur Homère qu'il refuse malhonnêtement de démontrer (il serait alors injuste), soit il n'a aucun savoir technique et n'est mû que par une puissance divine qui le dépasse (il serait alors divin, mais pas savant). Ion, sans hésiter, choisit d'être qualifié de « divin » plutôt que d'« injuste ». Le dialogue s'arrête là, sans trancher davantage — forme ouverte typique des dialogues de jeunesse de Platon."},
+  ],
+
+  republique:[
+    {n:'Ouverture', t:'595a–596a', h:'Rappel de la loi et aveu personnel', p:"Socrate rappelle une loi déjà posée au Livre III : la cité idéale doit bannir la poésie mimétique (tragédie, épopée) car elle est dangereuse. Il précise cependant, dès l'ouverture, éprouver lui-même « une certaine tendresse et un certain respect » pour Homère depuis l'enfance — aveu qui donne au texte une tonalité plus nuancée qu'un simple réquisitoire.", q:"Une certaine tendresse et un certain respect que j'ai dès l'enfance pour Homère me retiennent de parler.", qref:'République X, 595b'},
+    {n:'I', t:'596a–598d', h:'Les trois degrés de mimesis : les trois lits', p:"Socrate développe l'argument central à partir de l'exemple d'un lit. Trois niveaux : (1) l'Idée du lit (eidos), modèle intelligible unique créé par le dieu — seule réalité pleinement vraie ; (2) le lit fabriqué par le menuisier, qui imite l'Idée pour produire un objet utilisable — déjà une copie ; (3) le lit peint par le peintre, qui n'imite que l'apparence du lit du menuisier, vu sous un certain angle — une copie de copie, « troisième à partir de la vérité ». Le poète mimétique se situe à ce troisième degré : il ne connaît ni l'Idée ni même le savoir-faire du fabricant.", q:"Le lit peint par le peintre n'est qu'une copie de copie du Lit véritable.", qref:'République X, 597e — « troisième à partir de la vérité »'},
+    {n:'II', t:'598d–602b', h:'Le poète comme imitateur sans savoir réel', p:"Socrate montre qu'Homère, bien que représentant des médecins, des généraux, des artisans, ne possède en réalité aucune compétence dans ces domaines. Le poète est comparé à un homme qui, en promenant un miroir autour de lui, donnerait l'illusion de « créer » instantanément le soleil, les astres, les animaux, alors qu'il ne fait que réfléchir des apparences. L'imitateur est ainsi assimilé à un magicien, un illusionniste, qui exploite la crédulité de notre perception.", q:"Homère représente les médecins mais ignore la médecine, représente les chefs d'État mais ignore l'art de gouverner.", qref:'République X, 599c–e'},
+    {n:'III', t:'601c–602b', h:'Usager, fabricant, imitateur', p:"Pour tout objet (une flûte, un mors de cheval), Socrate distingue trois positions de savoir : celui qui l'utilise possède le savoir le plus complet ; celui qui le fabrique a une opinion droite guidée par les indications de l'usager ; celui qui l'imite (le peintre, le poète) n'a ni l'un ni l'autre — il ne fait que reproduire l'apparence extérieure."},
+    {n:'IV', t:'602c–606d', h:"La poésie et la partie irrationnelle de l'âme", p:"La poésie mimétique ne se contente pas de tromper l'intelligence, elle s'adresse directement à la partie irrationnelle de l'âme — celle qui pleure, se lamente — plutôt qu'à la raison. Socrate analyse le paradoxe du plaisir tragique : au théâtre, nous prenons plaisir à pleurer sur le malheur des héros, alors que dans la vraie vie nous nous efforçons de maîtriser notre propre douleur. Pour Platon, ce plaisir ne nous éduque pas (contrairement à ce que dira plus tard Aristote avec la catharsis) : il nourrit et fortifie la partie passionnelle de l'âme, au lieu de la dessécher.", q:"La poésie tragique flatte la partie de l'âme « qui a soif de larmes, qui voudrait soupirer à son aise et se rassasier de lamentations ».", qref:'République X, 606a'},
+    {n:'V', t:'606e–608b', h:"La vieille querelle et la conclusion", p:"Socrate rappelle qu'Homère est traditionnellement « l'éducateur de la Grèce » — c'est précisément ce statut de mauvais pédagogue déguisé en sage qui inquiète Platon. Il nomme explicitement le conflit : « un très ancien désaccord entre la philosophie et la poésie ». Le texte se referme sur une position mesurée : Socrate ne bannit pas la poésie par mépris mais par prudence, car il reconnaît lui-même être sensible à son charme. Il propose une porte de sortie : si la poésie peut prouver qu'elle est utile et véridique, elle pourra être réintégrée dans la cité.", q:"Il y a un désaccord très ancien entre la philosophie et la poésie.", qref:'République X, 607b — palaia diaphora'},
+  ],
+
+  axes:[
+    {t:"L'inspiration divine contre le savoir technique", p:"Dans Ion, la création poétique n'est explicable ni par la raison ni par la technique (technê) : c'est une possession, une force qui vient d'ailleurs et déresponsabilise le créateur — Ion préfère être « divin » plutôt que « savant mais malhonnête »."},
+    {t:"L'art comme éloignement de la vérité", p:"Dans La République, la mimesis artistique est frappée d'un discrédit métaphysique : elle est une copie de copie, « troisième à partir de la vérité ». Ce n'est plus la question de savoir d'où vient la création (comme dans Ion), mais ce qu'elle vaut par rapport au réel."},
+    {t:"Une tension interne à Platon lui-même", p:"Les deux textes ne disent pas exactement la même chose : Ion traite la possession poétique avec une certaine fascination ambiguë ; La République est beaucoup plus hostile et politique, allant jusqu'à l'exclusion des poètes de la cité. Souligner cette différence de ton est un bon point fin pour une dissertation qui les confronte plutôt que de les traiter comme un bloc unique."},
+    {t:"L'art et le pouvoir sur l'âme et sur la cité", p:"Dans les deux textes, la poésie agit par contagion — la chaîne magnétique de Ion, la contagion émotionnelle du spectacle tragique dans La République — et non par argumentation rationnelle. C'est cette dimension irrationnelle et incontrôlable qui inquiète Platon, philosophiquement et politiquement."},
+    {t:"Le philosophe lui-même pris dans le charme de l'art", p:"Platon ne se pose jamais en position de simple mépris : Socrate aime Homère (595b), Ion préfère la « divinité » à la honte d'être menteur. Le texte reconnaît la puissance réelle de la séduction poétique — c'est précisément parce qu'elle est puissante qu'elle doit être surveillée."},
+    {t:"Mise en regard avec Zola et Woolf", p:"Face à Claude Lantier (la création comme souffrance et échec solitaire) et à la thèse de Woolf (la création comme question de conditions matérielles), Platon pose la question la plus radicale : la création vient-elle de l'artiste, ou à travers lui, depuis un ailleurs qui ne lui appartient pas ?"},
+  ],
+
+  citations:[
+    {theme:'Inspiration divine', tag:'Ion', text:"Tous les bons poètes épiques ne composent pas en vertu d'un art, mais parce qu'ils sont inspirés et possédés. […] Ce qui les fait dire de si belles choses, ce n'est pas un art, c'est un don des dieux.", ref:'Ion, 533e–534a'},
+    {theme:'La chaîne magnétique', tag:'Ion', text:"La pierre d'aimant transmet sa force d'attraction aux anneaux de fer, qui peuvent à leur tour en attirer d'autres — de même la Muse rend le poète « entheos », et de proche en proche, à travers le rhapsode, cette possession se transmet jusqu'au spectateur.", ref:'Ion, 533d–536d'},
+    {theme:'Divin plutôt qu\u2019injuste', tag:'Ion', text:"Face au dilemme final — savoir caché et malhonnête, ou absence totale de savoir mais inspiration divine — Ion choisit sans hésiter d'être qualifié de « divin ».", ref:'Ion, 541e–542b'},
+    {theme:'Les trois lits', tag:'République X', text:"Le lit peint par le peintre n'est qu'une copie de copie du Lit véritable (l'Idée) : « troisième à partir de la vérité ».", ref:'République X, 597e'},
+    {theme:'Le miroir', tag:'République X', text:"L'imitateur est comparé à un homme qui, tournant un miroir autour de lui, ferait apparaître « instantanément » le soleil, les astres, les animaux — illusion, non création réelle.", ref:'République X, autour de 596d–e'},
+    {theme:'Le poète sans savoir', tag:'République X', text:"Homère représente les médecins mais ignore la médecine, représente les chefs d'État mais ignore l'art de gouverner.", ref:'République X, 599c–e'},
+    {theme:'La partie irrationnelle de l\u2019âme', tag:'République X', text:"La poésie tragique flatte la partie de l'âme « qui a soif de larmes, qui voudrait soupirer à son aise et se rassasier de lamentations ».", ref:'République X, 606a'},
+    {theme:'Le trouble de la perception', tag:'République X', text:"Les mêmes objets paraissent brisés ou droits, selon qu'on les regarde dans l'eau ou hors de l'eau […] c'est à cette infirmité de notre nature que la peinture ombrée, l'art du charlatan et cent autres inventions de ce genre s'adressent.", ref:'République X, 602cd'},
+    {theme:'La vieille querelle', tag:'République X', text:"Il y a un désaccord très ancien entre la philosophie et la poésie.", ref:'République X, 607b — palaia diaphora'},
+    {theme:'Le philosophe amoureux malgré lui', tag:'République X', text:"Nous ferons comme des amants qui, reconnaissant les funestes effets de leur passion, s'en détachent à contre cœur sans doute, mais enfin s'en détachent.", ref:'République X, 607c'},
+    {theme:'Aveu d\u2019attachement à Homère', tag:'République X', text:"Une certaine tendresse et un certain respect que j'ai dès l'enfance pour Homère me retiennent de parler.", ref:'République X, 595b'},
+  ],
+
+  concepts:[
+    ['Mimesis','Imitation ; chez Platon, reproduction d\u2019une apparence, jamais de l\u2019essence (l\u2019Idée).'],
+    ['Technê','Art véritable, savoir-faire cohérent et transmissible, appliqué à un domaine entier.'],
+    ['Enthousiasme (entheos)','Étymologiquement « avoir le dieu en soi » — état de possession divine du poète, opposé à la maîtrise rationnelle.'],
+    ['Eidos','L\u2019Idée, forme intelligible et immuable, seule pleinement réelle pour Platon.'],
+    ['Thumos','La partie irascible / passionnelle de l\u2019âme, sensible aux émotions que suscite la poésie.'],
+    ['Chaîne magnétique','Métaphore de Ion : Muse → poète → rhapsode → spectateur, transmission en cascade de la possession divine.'],
+    ['Les trois lits','Métaphore centrale de République X : Idée du lit → lit fabriqué → lit peint (trois degrés d\u2019éloignement de la vérité).'],
+    ['La « vieille querelle »','Formule exacte de 607b désignant le conflit ancien entre poésie et philosophie, rivales dans l\u2019éducation de la cité.'],
+  ],
+
+  reperes:[
+    ['Athènes, IVᵉ s. av. J.-C.', "Contexte historique après la mort de Socrate (condamné en 399 av. J.-C.) — le rapport de Platon à la poésie est marqué par une méfiance politique envers les discours qui échappent à la raison."],
+    ['Ion', "Généralement daté d'une période de jeunesse dans l'œuvre de Platon."],
+    ['La République', "Œuvre de maturité, bien plus ample (10 livres)."],
+    ['Édition du programme', "GF Flammarion, volume unique « Ion / La République, livre X (595a–608b) », trad. Canto-Sperber & Leroux, dossier de Raphaël Ehrsam."],
+  ],
+};
+
+const ZOLA = {
+  key:'zola', accentVar:'--verdigris', label:'Zola', workTitle:"L'Œuvre",
+  who:'Émile Zola (1886)',
+  thesis:"La création est une lutte physique et psychique. Claude Lantier, double de Cézanne, s'épuise à vouloir saisir le réel et finit par sombrer dans la folie puis le suicide.",
+  facts:[
+    ['Publication','1885–86 (feuilleton Gil Blas), puis Charpentier, 1886'],
+    ['Place dans le cycle','14ᵉ roman des Rougon-Macquart (sur 20)'],
+    ['Durée de l\u2019intrigue','env. 1862 → 1876'],
+  ],
+  subnav:[['presentation','Présentation'],['personnages','Personnages'],['resume','Résumé'],['axes','Axes'],['citations','Citations'],['reperes','Repères']],
+
+  presentation:`
+    <p>Le roman s'inspire de l'amitié de jeunesse de Zola avec <b>Paul Cézanne</b> (et Jean-Baptiste Baille) à Aix-en-Provence — Plassans est la transposition d'Aix. Claude Lantier reprend des traits de Cézanne, mais aussi de Manet (le scandale de <i>Plein air</i> renvoie au scandale du <i>Déjeuner sur l'herbe</i> au Salon des refusés de 1863, épisode réel).</p>
+    <p><b>Note critique :</b> on a longtemps dit que ce roman avait brouillé Zola et Cézanne définitivement ; les travaux récents relativisent cette thèse trop simple.</p>
+    <p><b>Rattachement généalogique :</b> Claude Lantier est fils de Gervaise Macquart et d'Auguste Lantier (voir <i>L'Assommoir</i>) — seul membre de la famille Rougon-Macquart présent dans ce roman. Il porte la « fêlure » héréditaire de l'ancêtre Adélaïde Fouque (tante Dide), qui dans le cycle explique tour à tour génie, névrose et folie chez ses descendants.</p>
+    <p><b>Intention de Zola</b> (notes préparatoires, hors-texte du roman) : « Avec Claude Lantier, je veux peindre la lutte de l'artiste contre la nature, l'effort de la création dans l'œuvre d'art, effort de sang et de larmes pour donner sa chair, faire de la vie : toujours en bataille avec le vrai et toujours vaincu, la lutte contre l'ange. »</p>
+  `,
+
+  personnages:[
+    ['Claude Lantier','Peintre de génie inabouti, chef de file des « pleinairistes ». Rude, taciturne, dévoré par l\u2019idéal. Meurt pendu devant sa toile inachevée.'],
+    ['Christine (Hallegrain)','Orpheline, ancienne lectrice de Mme Vanzade. Devient modèle, maîtresse puis femme de Claude. Incarne le corps, l\u2019amour, la vie — rivale de la peinture.'],
+    ['Pierre Sandoz','Romancier, ami d\u2019enfance de Claude, double de Zola lui-même. Porte-parole du projet naturaliste. Fidèle jusqu\u2019au bout.'],
+    ['Louis Dubuche','Architecte, ami d\u2019enfance. Choisit la réussite bourgeoise : épouse Régine, fille du riche Margaillan. Réussite matérielle qui tourne à l\u2019échec intime.'],
+    ['Jacques Lantier','Fils de Claude et Christine, hydrocéphale, quasi abandonné ; meurt vers 12 ans.'],
+    ['Fagerolles','Peintre habile et arriviste. « Vole » le style de Claude en l\u2019édulcorant pour plaire au public et au jury.'],
+    ['Mahoudeau','Sculpteur pauvre du groupe, « pygmalion tragique » : sa statue (la Baigneuse), faute de moyens, s\u2019effondre après le gel.'],
+    ['Bongrand','Peintre déjà consacré, aîné bienveillant. L\u2019un des deux seuls présents à l\u2019enterrement de Claude, avec Sandoz.'],
+    ['Jory / Gagnière / Chaîne','Autres membres de « la bande » : journaliste opportuniste, esthète féru de musique, peintre raté devenu commerçant.'],
+    ['Père Malgras','Marchand de tableaux bourru mais au flair sûr ; achète les toiles de Claude à bas prix.'],
+    ['Naudet','Marchand « à la mode », spéculateur sur la cote des peintres.'],
+    ['Irma Bécot','Courtisane, maîtresse de Fagerolles ; séduit brièvement Claude dans son plus grand désespoir.'],
+  ],
+
+  resume:[
+    {n:'I', h:'La rencontre', p:"Un soir d'orage de juillet 1862, Claude Lantier, rentrant à son atelier, trouve une jeune fille réfugiée sous le porche : Christine, arrivée de province, égarée dans Paris. Après hésitation, il l'héberge pour la nuit. Le lendemain matin, frappé par sa fraîcheur, il entreprend son portrait au pastel malgré sa réticence. Puis Christine repart pour Passy, laissant Claude déçu et troublé."},
+    {n:'II', h:'Sandoz, Dubuche et le père Malgras', p:"Sandoz, ami d'enfance de Claude, arrive à midi et lui sert de modèle pour son grand tableau Plein air. Les deux hommes évoquent leur jeunesse à Plassans (Claude cite Delacroix et Courbet comme ses maîtres). Dubuche les rejoint pour dîner. Le père Malgras vient acheter une toile à bas prix à Claude, insatisfait de son travail."},
+    {n:'III', h:'La bande, le jeudi chez Sandoz', p:"Rongé par le doute, Claude retrouve le jeudi la « bande » réunie chez Sandoz : Bongrand, peintre déjà célèbre et bienveillant, ainsi que Mahoudeau, Jory, Gagnière, Chaîne. Longue promenade dans Paris, dîner chaleureux. Claude rentre regonflé, persuadé qu'il réalisera un jour un chef-d'œuvre."},
+    {n:'IV', h:'Le retour de Christine', p:"Six semaines plus tard, Christine revient à l'atelier mais, gênée de se reconnaître dans la grande toile, repart aussitôt. Elle revient pourtant fin octobre 1862, puis prend l'habitude de visites régulières jusqu'en mai 1863 : une complicité amoureuse naît. Un jour, elle accepte de poser nue — la peinture retrouve un élan, et les deux jeunes gens échangent leur premier baiser."},
+    {n:'V', h:'Le Salon des refusés', p:"Le 15 mai 1863, Claude expose Plein air au Salon des refusés (événement réel de l'histoire de l'art). La toile suscite les rires et l'humiliation publique de Claude. Fagerolles, présent, comprend déjà ce qu'il faudrait « adoucir » dans ce style pour plaire au public — préfigurant sa propre réussite future. La douleur partagée de cet échec rapproche définitivement Claude et Christine.", q:"Fagerolles sentait déjà ce qu'il faudrait pour que cette peinture fît la conquête de tous, quelques tricheries peut-être, quelques arrangements du sujet, un adoucissement de la facture.", qref:'ch. V'},
+    {n:'VI', h:'Bennecourt', p:"Le couple fuit Paris pour s'installer à la campagne, à Bennecourt : quelques mois de bonheur amoureux complet. Christine tombe enceinte. Sandoz expose à ses amis son grand projet romanesque — transposition directe du projet des Rougon-Macquart de Zola. Dubuche fait un mariage bourgeois. Naissance de Jacques, atteint d'hydrocéphalie ; Christine se révèle piètre mère, préférant son rôle d'amante.", q:"Je vais prendre une famille, et j'en étudierai les membres, un à un, d'où ils viennent, où ils vont, comment ils réagissent, les uns sur les autres ; enfin, une humanité en petit, la façon dont l'humanité pousse et se comporte…", qref:'Sandoz, ch. VI'},
+    {n:'VII', h:'Retour à Paris', p:"Claude rend visite aux différents membres de la « bande » et mesure leur évolution — certains s'embourgeoisent, d'autres s'enfoncent dans l'échec. Le soir, tous se retrouvent pour dîner chez Sandoz, rue Nollet."},
+    {n:'VIII', h:"La toile de la Cité, le mariage", p:"Le couple s'installe rue de Douai. Claude travaille avec acharnement, mais ses paysages parisiens sont systématiquement refusés au Salon, trois années de suite. Il s'attaque à une composition immense : une vue de la Cité et de la Seine depuis le pont des Saints-Pères. Il finit par épouser Christine — mais la nuit de noces laisse déjà deviner l'effacement progressif du désir au profit de l'obsession picturale."},
+    {n:'IX', h:'La jalousie de Christine', p:"Claude travaille sans relâche à sa grande toile : les quais restent à l'état d'esquisse magistrale, mais la grande figure féminine nue, peinte « dans la fièvre », détonne étrangement. Christine, servant de modèle malgré elle, devient jalouse de cette toile qui capte tout l'amour de Claude.", q:"Elle ne se trompait pas, elle sentait bien qu'il préférait sa copie à elle-même, que cette copie était l'adorée, la préoccupation unique, la tendresse de toutes les heures.", qref:'ch. IX'},
+    {n:'X', h:"La mort de Jacques, l'ascension de Fagerolles", p:"La mort du petit Jacques, vers douze ans, laissé à l'abandon, ne devient pour Claude qu'un prétexte pictural — le tableau L'Enfant mort, envoyé au Salon sans succès. Fagerolles construit sa réussite officielle en édulcorant ouvertement le style de Claude, pendant que la sculpture de Mahoudeau, la Baigneuse, se fissure et s'effondre après le gel."},
+    {n:'XI', h:'La crise du marché, la ruine de Dubuche', p:"Le marché de l'art traverse une crise spéculative. Dubuche, ruiné après avoir fait perdre de l'argent à son beau-père, se retrouve mis à l'écart — mais devient un père admirable, dévoué à ses enfants chétifs malgré la misère. Claude, de plus en plus reclus et halluciné, erre avec Sandoz sur les ponts de Paris.", q:"Il faut mourir pour avoir raison.", qref:'Claude à Sandoz, ch. XI'},
+    {n:'XII', h:'La nuit finale et le suicide', p:"Une nuit de novembre, Claude retourne devant sa toile géante à la bougie et se remet à la retoucher fiévreusement. Christine, le sentant lui échapper, l'arrache un instant à « l'œuvre exécrée » — sursaut final et éphémère de la chair contre l'art. Mais Claude reste hanté par sa grande Femme nue, devenue à ses yeux une véritable idole. Il finit par se pendre devant son œuvre inachevée. Aux funérailles, seuls Bongrand et Sandoz sont présents. Le roman se clôt sur le retour au travail comme seule réponse possible au deuil.", q:"Qui donc venait de peindre cette idole d'une religion inconnue ? […] ce symbole du désir insatiable. — Trois grammes en moins ou trois grammes en plus. — Je ne veux pas m'en aller avec toi, je ne veux pas être heureux, je veux peindre. — Allons travailler.", qref:'ch. XII'},
+  ],
+
+  axes:[
+    {t:"L'art et l'échec de la création", p:"Le roman met en scène l'impossibilité de « faire de la vie » avec de la matière morte — la toile de Claude ne cesse d'être reprise, jamais achevée. L'échec n'est pas un manque de talent mais un excès d'exigence : Claude vise un absolu inatteignable."},
+    {t:"Déterminisme et hérédité naturalistes", p:"Claude porte la « fêlure » de la lignée des Rougon-Macquart. Son génie et sa folie sont présentés comme les deux faces d'un même déséquilibre biologique — logique naturaliste zolienne."},
+    {t:"Rivalité entre l'art et l'amour (le couple)", p:"Christine incarne le corps, la vie, le désir ; la toile devient sa rivale littérale. Structure « pyramidale » du roman (montée, sommet à Bennecourt, puis longue descente)."},
+    {t:'Paris comme personnage', p:"La ville, en particulier la Cité et la Seine, est décrite avec un lyrisme impressionniste qui fait concurrencer littérature et peinture."},
+    {t:'La « bande » : amitié et hiérarchie de la réussite', p:"Le groupe se disperse selon des trajectoires opposées : réussite sociale sans grandeur (Dubuche), réussite par compromis (Fagerolles), échec digne (Mahoudeau), fidélité sans compromission (Sandoz)."},
+    {t:'Naturalisme, impressionnisme et mise en abyme', p:"Claude est le chef de file fictif des « pleinairistes », transposition des impressionnistes réels. Le discours de Sandoz (ch. VI) est une mise en abyme directe du projet des Rougon-Macquart."},
+  ],
+
+  citations:[
+    {theme:"Le projet créateur et l'échec", text:"Avec Claude Lantier, je veux peindre la lutte de l'artiste contre la nature […] toujours en bataille avec le vrai et toujours vaincu, la lutte contre l'ange.", ref:'notes préparatoires de Zola, hors roman'},
+    {theme:"La fêlure héréditaire", text:"Trois grammes en moins ou trois grammes en plus.", ref:'ch. XII'},
+    {theme:"Le naturalisme, mise en abyme", text:"Je vais prendre une famille, et j'en étudierai les membres, un à un, d'où ils viennent, où ils vont, comment ils réagissent, les uns sur les autres… une humanité en petit.", ref:'Sandoz, ch. VI'},
+    {theme:"Le sacrifice de l'artiste", text:"Il faut mourir pour avoir raison.", ref:'Claude à Sandoz, ch. XI'},
+    {theme:"L'art contre le bonheur", text:"Je ne veux pas m'en aller avec toi, je ne veux pas être heureux, je veux peindre.", ref:'Claude à Christine, ch. XII'},
+    {theme:"La rivalité œuvre / femme aimée", text:"Elle ne se trompait pas, elle sentait bien qu'il préférait sa copie à elle-même, que cette copie était l'adorée, la préoccupation unique, la tendresse de toutes les heures.", ref:'à propos de Christine, ch. IX'},
+    {theme:"L'art comme idole", text:"Qui donc venait de peindre cette idole d'une religion inconnue ? […] ce symbole du désir insatiable, de cette image extra-humaine de la chair.", ref:'ch. XII'},
+    {theme:"La réussite par compromis", text:"Fagerolles sentait déjà ce qu'il faudrait pour que cette peinture fît la conquête de tous, quelques tricheries peut-être, quelques arrangements du sujet, un adoucissement de la facture.", ref:'ch. V'},
+    {theme:"Le mot de la fin", text:"Allons travailler.", ref:'dernière réplique du roman, Sandoz, ch. XII'},
+  ],
+
+  reperes:[
+    ['Juillet 1862', "Claude a vingt ans — rencontre avec Christine ; premier dîner chez Sandoz."],
+    ['15 mai 1863', "Exposition de Plein air au Salon des refusés — scandale."],
+    ['1863', "Installation à Bennecourt."],
+    ['Février 1864', "Naissance de Jacques."],
+    ['~1876', "Mort de Jacques, vers douze ans."],
+    ['Novembre 1876', "Dernier dîner chez Sandoz, suicide de Claude devant sa toile inachevée."],
+  ],
+};
+
+const WOOLF = {
+  key:'woolf', accentVar:'--plum', label:'Woolf', workTitle:'Un lieu à soi',
+  who:'Virginia Woolf (1929)',
+  thesis:"Pour créer, il faut de l'argent et un lieu à soi. L'absence de femmes dans la littérature s'explique par l'absence de ces conditions matérielles, pas par un manque de talent.",
+  facts:[
+    ['Genèse','Deux conférences, Cambridge, oct. 1928 (Newnham & Girton)'],
+    ['Traduction du programme','Marie Darrieussecq, Folio classique n°6764 (2016)'],
+    ['Structure','6 chapitres, sans titres officiels dans le texte original'],
+  ],
+  subnav:[['presentation','Présentation'],['resume','Résumé'],['axes','Axes'],['citations','Citations'],['figures','Figures'],['reperes','Repères']],
+
+  presentation:`
+    <p>Le texte est porté par une narratrice fictive qui refuse de se laisser enfermer dans une identité stable : « appelez-moi Mary Beton, Mary Seton, Mary Carmichael, ou n'importe quel nom qui vous plaira — cela n'a aucune importance. » Ce brouillage volontaire du « je » est une prise de position : peu importe qui parle, ce qui compte, ce sont les conditions matérielles qui permettent ou empêchent de parler.</p>
+    <p><b>Thèse centrale</b>, formulée dès le chapitre I : « Une femme doit avoir de l'argent et un lieu à elle si elle veut écrire de la fiction. »</p>
+    <p><b>Attention aux traductions</b> : beaucoup de citations qui circulent en ligne viennent de l'ancienne traduction de Clara Malraux (<i>Une chambre à soi</i>, 1965), dont le vocabulaire diffère parfois de celui de Darrieussecq (« chambre » au lieu de « lieu », etc.). Vérifie toujours le mot à mot dans ton édition avant de citer en dissertation.</p>
+  `,
+
+  resume:[
+    {n:'I', h:'Les femmes, la fiction et l\u2019argent', p:"La narratrice raconte les deux jours qui ont précédé sa conférence. Assise au bord d'une rivière à « Oxbridge », un gardien l'interrompt : les pelouses sont interdites aux femmes. Elle tente d'entrer à la bibliothèque : accès refusé aux femmes non accompagnées. Elle observe le contraste entre le déjeuner fastueux d'un collège d'hommes et le dîner frugal d'un collège de femmes voisin, faute de dotations comparables. De ces observations naît la thèse du texte : ce n'est pas le talent qui manque aux femmes, mais l'argent et l'espace."},
+    {n:'II', h:'Sur la prétendue infériorité des femmes', p:"Au British Museum, la narratrice découvre une masse de livres écrits par des hommes sur les femmes, marqués par la colère plutôt que la science. Elle comprend que cette colère masculine dissimule un besoin de se sentir supérieur. Elle relie ce mécanisme à l'Histoire : jusqu'à des lois récentes, une femme mariée ne pouvait légalement posséder l'argent qu'elle gagnait. Elle évoque avoir hérité, la même année où les femmes ont obtenu le droit de vote, d'une rente de 500 livres par an — et affirme que cet argent a compté bien davantage pour sa liberté que le vote lui-même.", q:"Les femmes ont pendant des siècles servi aux hommes de miroirs, elles possédaient le pouvoir magique et délicieux de réfléchir une image de l'homme deux fois plus grande que nature.", qref:'ch. II'},
+    {n:'III', h:'Shakespeare et sa sœur imaginaire', p:"La narratrice se tourne vers les historiens pour comprendre la condition réelle des femmes à l'époque élisabéthaine. Paradoxe frappant : dans la fiction, les femmes dominent la scène ; dans la réalité historique, elles sont quasiment absentes des textes, mariées de force, sans droits. C'est ici qu'intervient le passage le plus célèbre : la narratrice imagine que Shakespeare avait une sœur, Judith, aussi douée que lui. Interdite d'école, mariée de force, elle s'enfuit à Londres pour tenter le théâtre ; on se moque d'elle, un directeur de troupe la séduit et l'abandonne enceinte ; désespérée, elle se donne la mort, enterrée dans une fosse anonyme. Cette fiction démontre que le génie féminin n'a jamais manqué, mais qu'il n'a eu aucune condition matérielle et sociale pour s'exprimer."},
+    {n:'IV', h:'Les femmes qui ont malgré tout écrit', p:"La narratrice retrace l'histoire des femmes qui, contre ces obstacles, sont parvenues à écrire : Dorothy Osborne, puis surtout Aphra Behn (XVIIe s.), première femme à vivre professionnellement de sa plume. Au XVIIIe siècle, de plus en plus de femmes de la classe moyenne se mettent à écrire. Puis le paradoxe du XIXe : Jane Austen, les sœurs Brontë et George Eliot écrivent des romans — un genre qui demande pourtant plus de concentration continue que la poésie, alors même que ces femmes n'avaient ni pièce à elles ni intimité.", q:"Les chefs-d'œuvre ne sont pas nés seuls et dans la solitude ; ils sont le résultat de nombreuses années de pensées en commun, de pensées élaborées par l'esprit d'un peuple entier, de sorte que l'expérience de la masse se trouve derrière la voix d'un seul.", qref:'ch. IV'},
+    {n:'V', h:'Sur L\u2019Aventure de la vie de Mary Carmichael', p:"La narratrice imagine un roman contemporain, écrit par une romancière fictive, Mary Carmichael. Elle observe la manière dont l'écriture féminine moderne « casse la phrase », « casse la séquence » — écho au style de Woolf elle-même. Un moment la frappe : la phrase « Chloé aimait Olivia » — la première fois, selon elle, que la littérature montre une amitié entre deux femmes indépendante de leur rapport aux hommes. La narratrice conclut que dans cent ans, avec de l'argent et un lieu à elle, Mary Carmichael sera poète."},
+    {n:'VI', h:'L\u2019esprit androgyne', p:"De retour chez elle, la narratrice observe un homme et une femme monter ensemble dans un taxi, dans un naturel parfait — image qui la fait réfléchir à l'idée que l'esprit humain n'est peut-être ni purement masculin, ni purement féminin. Elle convoque l'idée de Coleridge selon laquelle « les grands esprits sont androgynes » : les plus grands écrivains font coopérer en eux la part masculine et la part féminine de l'esprit. Le texte se referme sur un appel à l'auditoire : cesser d'écrire pour prouver quoi que ce soit aux hommes, écrire pour soi. La narratrice reprend une dernière fois la figure de Judith Shakespeare et conclut que si les femmes saisissent enfin l'occasion — un lieu à elles, de l'argent, la liberté de penser — alors Shakespeare's sister renaîtra.", q:"Cette poétesse qui n'a jamais écrit un mot et qui a été enterrée à ce carrefour est toujours vivante. Elle vit en moi, en vous… il leur suffit d'une occasion pour se manifester parmi nous en chair et en os.", qref:'ch. VI'},
+  ],
+
+  axes:[
+    {t:"La création comme phénomène matériel, non purement spirituel", p:"Contre le mythe romantique du génie inné, Woolf ramène la création à des conditions très concrètes : argent, temps libre, intimité physique. Une thèse presque matérialiste de l'art."},
+    {t:'La création comme phénomène collectif', p:"« Les chefs-d'œuvre ne sont pas nés seuls et dans la solitude » : Woolf insiste sur la dimension sociale et cumulative du génie. À opposer frontalement à la figure du génie solitaire et maudit de Claude Lantier chez Zola."},
+    {t:"L'Histoire contre la fiction : l'invisibilisation des femmes", p:"Le contraste entre la place immense des femmes dans la fiction et leur quasi-absence des archives historiques structure tout le texte — et fonde la nécessité de la fiction spéculative (Judith Shakespeare)."},
+    {t:'La colère comme obstacle à la création', p:"Woolf repère la colère comme un parasite de l'écriture : un esprit qui doit se battre pour exister n'est jamais tout à fait libre de créer. D'où l'importance de l'indépendance matérielle, qui permet d'écrire sans ressentiment."},
+    {t:"L'androgynie de l'esprit créateur", p:"Idée finale et la plus théorique du texte : le meilleur de la création naît de la fusion des « parts » masculine et féminine de l'esprit, jamais de leur opposition binaire."},
+    {t:'Un texte qui théorise sa propre forme', p:"Woolf pratique dans cet essai même ce qu'elle décrit chez Mary Carmichael : elle « casse » le genre de la conférence argumentative classique en la mêlant à la fiction, à l'autobiographie, à l'ironie."},
+  ],
+
+  citations:[
+    {theme:'Thèse centrale', text:"Une femme doit avoir de l'argent et un lieu à elle si elle veut écrire de la fiction.", ref:'ch. I'},
+    {theme:'Le miroir', text:"Les femmes ont pendant des siècles servi aux hommes de miroirs, elles possédaient le pouvoir magique et délicieux de réfléchir une image de l'homme deux fois plus grande que nature.", ref:'ch. II'},
+    {theme:"L'ego masculin", text:"Peut-être, lorsque le professeur insiste d'une façon par trop accentuée sur l'infériorité des femmes, s'agit-il non de leur infériorité à elles, mais de sa propre supériorité.", ref:'ch. II'},
+    {theme:"L'indépendance financière", text:"Aucune puissance de ce monde ne peut m'enlever mes cinq cents livres.", ref:'ch. II, à propos de l\u2019héritage de la narratrice'},
+    {theme:"L'argent et la dignité", text:"L'argent confère la dignité à ce qui serait frivole si on ne le payait pas.", ref:'ch. IV, à propos d\u2019Aphra Behn'},
+    {theme:'Judith Shakespeare, reprise finale', text:"Cette poétesse qui n'a jamais écrit un mot et qui a été enterrée à ce carrefour est toujours vivante. Elle vit en moi, en vous… il leur suffit d'une occasion pour se manifester parmi nous en chair et en os.", ref:'ch. VI'},
+    {theme:'La création collective', text:"Les chefs-d'œuvre ne sont pas nés seuls et dans la solitude ; ils sont le résultat de nombreuses années de pensées en commun, de pensées élaborées par l'esprit d'un peuple entier.", ref:'ch. IV'},
+    {theme:"L'esprit androgyne", text:"Les grands esprits sont androgynes — clé de voûte de la théorie woolfienne de la création : la fusion des deux « parts » de l'esprit, sans domination de l'une sur l'autre.", ref:'ch. VI, reprise de Coleridge'},
+    {theme:'Contre l\u2019uniformité entre les sexes', text:"Il serait infiniment regrettable que les femmes écrivissent comme des hommes, car si deux sexes sont tout à fait suffisants quand on songe à l'étendue et à la diversité du monde, comment nous en tirerions-nous avec un seul ?", ref:'ch. VI'},
+  ],
+
+  figures:[
+    ['Mary Beton / Seton / Carmichael','fictive','Narratrice fictive, identité volontairement instable — porte-voix de la réflexion.'],
+    ['Judith Shakespeare','fictive','Sœur imaginaire de Shakespeare, inventée par la narratrice pour démontrer que le génie féminin existait mais n\u2019avait aucune voie pour s\u2019exprimer (ch. III, repris ch. VI).'],
+    ['Aphra Behn','réelle, XVIIe s.','Première femme à vivre de sa plume ; symbole du tournant matériel et pratique de l\u2019écriture féminine (ch. IV).'],
+    ['Austen, Brontë, Eliot','réelles, XIXe s.','Illustrent le paradoxe du roman féminin né malgré l\u2019absence d\u2019intimité matérielle (ch. IV).'],
+    ['Mary Carmichael','fictive, années 1920','Romancière imaginée par la narratrice pour étudier l\u2019écriture féminine moderne (ch. V).'],
+    ['Samuel Taylor Coleridge','réel','Source de la théorie de « l\u2019esprit androgyne » que Woolf reprend et développe (ch. VI).'],
+  ],
+
+  reperes:[
+    ['Octobre 1928', "Conférences données à Newnham College et Girton College (Cambridge)."],
+    ['1929', "Publication de l'essai."],
+    ['Structure', "6 chapitres, sans titres officiels dans le texte original."],
+    ['Deux conditions', "Une pièce à soi, verrouillable (intimité, concentration) et 500 livres de rente par an (indépendance financière)."],
+  ],
+};
+
+/* ============================= CITATIONS PAR CHAPITRE ============================= */
+/* t : 'c' = citation reprise de la fiche · 'cv' = citation à vérifier mot à mot · 'i' = idée clé reformulée */
+const CITS = {
+
+platon_ion:[
+  [ /* Prologue */
+    {t:'i', q:"Le rhapsode doit se faire l'interprète de la pensée du poète auprès des auditeurs, et pas seulement apprendre ses vers.", ctx:"Socrate félicite Ion pour sa victoire à Épidaure et dit envier son métier : comprendre Homère, pas seulement le réciter. Cette définition sert de piège pour la suite : si Ion comprend vraiment Homère, il doit savoir de quoi Homère parle.", k:"Rhapsode = interprète de la pensée du poète.", ref:'Ion, 530b–c'},
+    {t:'i', q:"Ion se vante de n'avoir jamais été égalé pour parler d'Homère.", ctx:"Ion répond avec assurance qu'aucun autre ne parle aussi bien d'Homère. Cette fierté ouvre la question centrale du dialogue : d'où lui vient ce talent, d'un art ou d'autre chose ?", k:"Point de départ : Ion est sûr de son talent, Socrate va l'examiner.", ref:'Ion, 530c–d'}
+  ],
+  [ /* I */
+    {t:'i', q:"Sur Homère, Ion est éveillé et abondant ; sur Hésiode ou Archiloque, il s'ennuie et n'a rien à dire.", ctx:"Socrate demande si Ion parle aussi bien des autres poètes, qui traitent pourtant des mêmes sujets. Ion avoue que non.", k:"Talent limité à un seul poète.", ref:'Ion, 532b–c'},
+    {t:'i', q:"Si c'était un art, tu saurais parler aussi bien de tous les poètes qui traitent des mêmes sujets.", ctx:"Raisonnement de Socrate qui prépare le chapitre II : l'incapacité d'Ion hors d'Homère est un indice qu'il ne possède pas de technê.", k:"Un seul poète maîtrisé ⇒ ce n'est pas un art.", ref:'Ion, 532b–d'}
+  ],
+  [ /* II */
+    {t:'i', q:"Celui qui sait juger un peintre sait juger tous les peintres : un art porte sur un domaine entier.", ctx:"Socrate généralise avec la peinture, la sculpture, la musique, l'arithmétique. C'est la règle qui définit une technê : cohérente et universelle dans son domaine.", k:"Technê = savoir unifié sur tout un domaine.", ref:'Ion, 532e–533b'},
+    {t:'i', q:"Ce n'est pas par art que tu parles bien d'Homère, mais par une puissance divine qui te meut.", ctx:"Conclusion de Socrate : puisque le talent d'Ion n'est pas un savoir, il faut une autre explication. Elle annonce l'image de l'aimant.", k:"Ni art ni savoir : une force extérieure (theia dynamis).", ref:'Ion, 533c–d'}
+  ],
+  [ /* III */
+    {t:'c', q:"Tous les bons poètes épiques ne composent pas en vertu d'un art, mais parce qu'ils sont inspirés et possédés. […] Ce qui les fait dire de si belles choses, ce n'est pas un art, c'est un don des dieux.", ctx:"Socrate applique aux poètes l'image de la pierre d'aimant : la Muse transmet sa force au poète, qui la transmet au rhapsode, puis au public.", k:"La beauté du poème vient d'un don divin, pas d'un savoir.", ref:'Ion, 533e–534a'},
+    {t:'cv', q:"Le poète est une chose légère, ailée et sacrée ; il n'est pas capable de créer avant d'être inspiré, hors de lui, et que son intelligence ne soit plus en lui.", ctx:"Socrate insiste : le poète ne compose que lorsqu'il perd la maîtrise de sa raison. C'est la version la plus nette de l'opposition entre inspiration et savoir.", k:"Poète = léger, ailé, sacré, « hors de lui ».", ref:'Ion, 534b'}
+  ],
+  [ /* IV */
+    {t:'i', q:"Sur les passages d'Homère qui parlent de médecine, de divination, de pêche ou de char, un spécialiste juge mieux que le rhapsode.", ctx:"Socrate reprend des passages techniques d'Homère et Ion doit admettre, à chaque fois, que le médecin, le devin ou le pêcheur est meilleur juge que lui.", k:"Le rhapsode n'a aucune compétence technique sur ce que dit le poète.", ref:'Ion, 537a–540b'},
+    {t:'i', q:"Ion prétend qu'il serait un bon général ; Socrate lui demande pourquoi il n'en est pas un.", ctx:"Poussé dans ses retranchements, Ion revendique la stratégie d'Homère. Socrate tourne l'argument en dérision : un homme si savant devrait commander des armées, pas réciter.", k:"Point où l'orgueil d'Ion devient ridicule.", ref:'Ion, 540d–541b'}
+  ],
+  [ /* Épilogue */
+    {t:'i', q:"Socrate compare Ion à Protée, qui prend toutes les formes pour lui échapper.", ctx:"Ion refuse d'admettre qu'il n'a aucun savoir et se dérobe. Socrate lui reproche de se métamorphoser plutôt que de démontrer son art.", k:"Image de l'esquive : Protée.", ref:'Ion, 541e'},
+    {t:'i', q:"Ion préfère être tenu pour divin plutôt que pour injuste.", ctx:"Dilemme final : soit Ion a un art et le cache (il est injuste), soit il n'en a pas et il est inspiré (il est divin). Il choisit d'être divin. Le dialogue s'arrête là.", k:"Conclusion : le poète est inspiré, pas savant.", ref:'Ion, 542a–b'}
+  ]
+],
+
+platon_rep:[
+  [ /* Ouverture */
+    {t:'c', q:"Une certaine tendresse et un certain respect que j'ai dès l'enfance pour Homère me retiennent de parler.", ctx:"Avant de critiquer la poésie mimétique, Socrate avoue son attachement à Homère. Le texte s'ouvre donc sur une tension entre affection et exigence de vérité.", k:"Platon critique un poète qu'il aime.", ref:'République X, 595b'},
+    {t:'cv', q:"Il ne faut pas honorer un homme plus que la vérité.", ctx:"Socrate justifie de parler malgré son respect pour Homère : la vérité passe avant l'admiration pour une autorité.", k:"Priorité de la vérité sur l'autorité.", ref:'République X, 595c'}
+  ],
+  [ /* I */
+    {t:'c', q:"Le lit peint par le peintre n'est qu'une copie de copie du Lit véritable.", ctx:"Après les trois lits (Idée, lit du menuisier, lit du peintre), Socrate situe le peintre, et donc le poète, « troisième à partir de la vérité ».", k:"Imitateur = à trois degrés de la vérité.", ref:'République X, 597e'},
+    {t:'i', q:"Il n'y a qu'un seul lit véritable, l'Idée du lit, dont le dieu est l'auteur ; le menuisier ne fabrique que des lits particuliers.", ctx:"Socrate pose le premier degré de la hiérarchie : l'Idée (eidos), seule pleinement réelle, dont le menuisier s'inspire pour fabriquer.", k:"Idée → objet fabriqué → image peinte.", ref:'République X, 596b–597d'}
+  ],
+  [ /* II */
+    {t:'c', q:"Homère représente les médecins mais ignore la médecine, représente les chefs d'État mais ignore l'art de gouverner.", ctx:"Socrate demande quelles cités Homère a réellement gouvernées ou quels blessés il a soignés : aucun. Le poète représente des savoirs qu'il ne possède pas.", k:"Le poète imite sans savoir.", ref:'République X, 599c–e'},
+    {t:'i', q:"L'imitateur est comme celui qui tourne un miroir dans tous les sens et fait apparaître en un instant le soleil, les astres, les animaux.", ctx:"Socrate compare le poète ou le peintre à un faiseur d'illusions : il reflète des apparences sans créer de réalité.", k:"Miroir = apparence, pas création.", ref:'République X, 596d–e'}
+  ],
+  [ /* III */
+    {t:'i', q:"L'imitation est un jeu, non une chose sérieuse.", ctx:"Socrate conclut que la poésie mimétique, qui ne repose sur aucun savoir de ce qu'elle représente, relève du divertissement et non de la connaissance.", k:"Imiter = jouer, pas savoir.", ref:'République X, 602b'},
+    {t:'i', q:"L'usager connaît, le fabricant a une opinion droite grâce à l'usager, l'imitateur ne sait rien et n'a pas d'opinion juste.", ctx:"Exemple de la flûte ou du mors : trois degrés de savoir. Le poète est au plus bas, il ne connaît ni l'usage ni la fabrication.", k:"Usager > fabricant > imitateur.", ref:'République X, 601c–602a'}
+  ],
+  [ /* IV */
+    {t:'c', q:"Les mêmes objets paraissent brisés ou droits, selon qu'on les regarde dans l'eau ou hors de l'eau […] c'est à cette infirmité de notre nature que la peinture ombrée, l'art du charlatan et cent autres inventions de ce genre s'adressent.", ctx:"Socrate part des illusions d'optique pour montrer que l'art exploite les faiblesses de la perception, que la raison, elle, corrige par la mesure.", k:"L'art parle à nos illusions, la raison les corrige.", ref:'République X, 602c–d'},
+    {t:'c', q:"La poésie tragique flatte la partie de l'âme « qui a soif de larmes, qui voudrait soupirer à son aise et se rassasier de lamentations ».", ctx:"Socrate analyse le plaisir tragique : nous jouissons au théâtre de pleurer sur des héros, alors que nous refusons de nous plaindre dans notre propre malheur. Cela nourrit la partie irrationnelle de l'âme.", k:"La tragédie fortifie la passion au lieu de la maîtriser.", ref:'République X, 606a'}
+  ],
+  [ /* V */
+    {t:'c', q:"Il y a un désaccord très ancien entre la philosophie et la poésie.", ctx:"Socrate nomme le vieux conflit entre les deux discours rivaux pour éduquer la cité. C'est la formule à connaître pour résumer la position de Platon.", k:"« Palaia diaphora » : philosophie contre poésie.", ref:'République X, 607b'},
+    {t:'c', q:"Nous ferons comme des amants qui, reconnaissant les funestes effets de leur passion, s'en détachent à contre cœur sans doute, mais enfin s'en détachent.", ctx:"Socrate avoue qu'il aime la poésie mais qu'il doit s'en détacher. Il lui laisse une chance de revenir si elle prouve son utilité.", k:"Bannir à regret, sans mépris.", ref:'République X, 607c'}
+  ]
+],
+
+zola:[
+  [ /* I */
+    {t:'i', q:"Claude recueille Christine, surprise par l'orage, et la laisse dormir dans son atelier avant de se retirer.", ctx:"Ouverture du roman, en juillet 1862. Le jeune peintre respecte l'inconnue, ce qui installe d'emblée un lien entre amour et atelier.", k:"L'amour naît dans l'atelier.", ref:'ch. I'},
+    {t:'i', q:"Le lendemain matin, frappé par la fraîcheur de Christine endormie, Claude entreprend son portrait au pastel.", ctx:"Il regarde d'abord la jeune fille en peintre, comme un motif. C'est la première trace de la rivalité qui opposera plus tard l'art et le corps aimé.", k:"Le regard du peintre précède celui de l'amant.", ref:'ch. I'}
+  ],
+  [ /* II */
+    {t:'i', q:"Claude cite Delacroix et Courbet comme ses maîtres, devant Sandoz venu poser pour Plein air.", ctx:"Les deux amis évoquent leur jeunesse à Plassans. Claude se place dans la lignée du romantisme de la couleur et du réalisme.", k:"Filiation : Delacroix (couleur) et Courbet (vérité).", ref:'ch. II'},
+    {t:'i', q:"Le père Malgras vient lui acheter une toile à bas prix, alors que Claude est insatisfait de son travail.", ctx:"Premier signe de la précarité de l'artiste et de son exigence : il ne voit que ses défauts, le marchand y voit une affaire.", k:"Exigence de l'artiste contre logique du marché.", ref:'ch. II'}
+  ],
+  [ /* III */
+    {t:'i', q:"Le jeudi, la « bande » se réunit chez Sandoz : Bongrand, Mahoudeau, Jory, Gagnière, Chaîne.", ctx:"Le groupe rassemble les arts et les tempéraments. Bongrand, peintre déjà célèbre, est le grand frère bienveillant.", k:"Chapitre de la camaraderie et des ambitions.", ref:'ch. III'},
+    {t:'i', q:"Claude rentre regonflé, persuadé qu'il réalisera un jour un chef-d'œuvre.", ctx:"Après avoir douté, il retrouve sa foi dans l'avenir. Cet espoir prépare la chute : plus il croit au chef-d'œuvre, plus l'échec sera cruel.", k:"L'espoir du chef-d'œuvre, moteur puis piège.", ref:'ch. III'}
+  ],
+  [ /* IV */
+    {t:'i', q:"Christine, gênée de se reconnaître dans la grande toile, repart aussitôt avant de revenir.", ctx:"Elle découvre qu'elle sert de modèle à Plein air. Le va-et-vient montre son hésitation entre pudeur et attirance.", k:"Le modèle et la peinture : première tension.", ref:'ch. IV'},
+    {t:'i', q:"Christine accepte de poser nue ; la peinture retrouve un élan et les deux jeunes gens échangent leur premier baiser.", ctx:"Moment où l'amour et la création s'alimentent mutuellement. C'est le sommet de leur accord, avant qu'ils ne deviennent rivaux.", k:"Ici, amour et art avancent ensemble.", ref:'ch. IV'}
+  ],
+  [ /* V */
+    {t:'i', q:"Le 15 mai 1863, Plein air est exposé au Salon des refusés et provoque les rires du public.", ctx:"Épisode inspiré du scandale du Déjeuner sur l'herbe de Manet. Claude est humilié, ce qui rapproche Christine de lui.", k:"L'incompréhension du public : scandale et humiliation.", ref:'ch. V'},
+    {t:'c', q:"Fagerolles sentait déjà ce qu'il faudrait pour que cette peinture fît la conquête de tous, quelques tricheries peut-être, quelques arrangements du sujet, un adoucissement de la facture.", ctx:"Dans la salle, Fagerolles, peintre habile, comprend comment adoucir le style de Claude pour plaire. Il annonce sa future réussite par compromis.", k:"Fagerolles = réussite par compromis.", ref:'ch. V'}
+  ],
+  [ /* VI */
+    {t:'c', q:"Je vais prendre une famille, et j'en étudierai les membres, un à un, d'où ils viennent, où ils vont, comment ils réagissent, les uns sur les autres… une humanité en petit.", ctx:"À Bennecourt, Sandoz expose à ses amis son projet romanesque. C'est une mise en abyme : il décrit le projet des Rougon-Macquart de Zola.", k:"Sandoz = double de Zola, projet naturaliste.", ref:'Sandoz, ch. VI'},
+    {t:'i', q:"Après la naissance de Jacques, atteint d'hydrocéphalie, Christine se révèle piètre mère, préférant son rôle d'amante.", ctx:"Le bonheur de Bennecourt cache déjà des fissures : l'enfant, malade, est négligé, ce qui annonce sa fin.", k:"Sommet du bonheur, premiers signes de la descente.", ref:'ch. VI'}
+  ],
+  [ /* VII */
+    {t:'i', q:"Claude rend visite aux membres de la bande et mesure leur évolution : les uns s'embourgeoisent, les autres s'enfoncent dans l'échec.", ctx:"Retour à Paris. Le chapitre fait le point sur les trajectoires, qui divergent nettement.", k:"La bande se disperse.", ref:'ch. VII'},
+    {t:'i', q:"Le soir, tous se retrouvent pour dîner chez Sandoz, rue Nollet.", ctx:"Malgré leurs différences, l'amitié tient encore. Sandoz reste le pivot fidèle du groupe.", k:"Sandoz, centre de l'amitié.", ref:'ch. VII'}
+  ],
+  [ /* VIII */
+    {t:'i', q:"Trois années de suite, les paysages parisiens de Claude sont refusés au Salon.", ctx:"Le couple s'installe rue de Douai. Claude travaille avec acharnement mais reste rejeté par les institutions.", k:"Refus répétés : l'échec s'installe.", ref:'ch. VIII'},
+    {t:'i', q:"Claude épouse Christine, mais la nuit de noces laisse deviner l'effacement du désir au profit de l'obsession picturale.", ctx:"Il s'attaque en même temps à sa grande toile de la Cité. Le mariage, censé consacrer l'amour, marque au contraire le début de la distance.", k:"Le mariage arrive quand l'amour s'efface derrière l'œuvre.", ref:'ch. VIII'}
+  ],
+  [ /* IX */
+    {t:'c', q:"Elle ne se trompait pas, elle sentait bien qu'il préférait sa copie à elle-même, que cette copie était l'adorée, la préoccupation unique, la tendresse de toutes les heures.", ctx:"Christine, servant de modèle pour la grande figure nue, devient jalouse de la toile qui capte tout l'amour de Claude.", k:"La toile est devenue la rivale de Christine.", ref:'ch. IX'},
+    {t:'i', q:"La grande figure féminine nue, peinte « dans la fièvre », détonne dans le paysage encore à l'état d'esquisse.", ctx:"Les quais restent une esquisse magistrale, mais la Femme nue, obsessionnelle, ne s'accorde plus avec le reste. Elle annonce l'idole du chapitre final.", k:"La Femme nue : début de l'idole.", ref:'ch. IX'}
+  ],
+  [ /* X */
+    {t:'i', q:"La mort de Jacques devient pour Claude un prétexte pictural : il peint L'Enfant mort.", ctx:"Le petit garçon, laissé à l'abandon, meurt vers douze ans. Le père le regarde d'abord en peintre, ce qui montre jusqu'où va sa dévoration par l'art.", k:"L'art passe avant l'enfant.", ref:'ch. X'},
+    {t:'i', q:"La Baigneuse de Mahoudeau, faute de moyens, se fissure et s'effondre après le gel.", ctx:"Pendant que Fagerolles réussit en édulcorant le style de Claude, la sculpture du pauvre Mahoudeau s'effondre, faute d'argent.", k:"Échec matériel de Mahoudeau contre réussite de Fagerolles.", ref:'ch. X'}
+  ],
+  [ /* XI */
+    {t:'c', q:"Il faut mourir pour avoir raison.", ctx:"Claude, reclus et halluciné, erre sur les ponts de Paris avec Sandoz. Il en vient à penser que seule la mort donnera raison à l'artiste.", k:"Sacrifice de l'artiste, annonce du suicide.", ref:'Claude à Sandoz, ch. XI'},
+    {t:'i', q:"Ruiné, Dubuche devient un père admirable, dévoué à ses enfants chétifs malgré la misère.", ctx:"Contraste avec Claude, qui a sacrifié son propre fils à l'art : l'échec social de Dubuche débouche sur une réussite humaine.", k:"Dubuche père / Claude père : deux attitudes opposées.", ref:'ch. XI'}
+  ],
+  [ /* XII */
+    {t:'c', q:"Je ne veux pas m'en aller avec toi, je ne veux pas être heureux, je veux peindre.", ctx:"Une nuit de novembre, Christine l'arrache un instant à la toile, mais Claude refuse le bonheur : c'est la réplique qui résume tout le roman.", k:"L'art contre le bonheur.", ref:'Claude à Christine, ch. XII'},
+    {t:'c', q:"Allons travailler.", ctx:"Dernière réplique de Sandoz après l'enterrement de Claude, auquel n'assistent que Bongrand et lui. Le roman finit sur le travail comme seule réponse au deuil.", k:"Le travail continue malgré l'échec.", ref:'Sandoz, dernière réplique, ch. XII'}
+  ]
+],
+
+woolf:[
+  [ /* I */
+    {t:'c', q:"Une femme doit avoir de l'argent et un lieu à elle si elle veut écrire de la fiction.", ctx:"Conclusion des observations d'Oxbridge : pelouses interdites aux femmes, bibliothèque fermée, repas frugal dans le collège de femmes. La narratrice formule sa thèse.", k:"Thèse centrale : argent + lieu à soi.", ref:'ch. I'},
+    {t:'cv', q:"On ne peut bien penser, bien aimer, bien dormir, si l'on n'a pas bien dîné.", ctx:"La narratrice compare le déjeuner fastueux d'un collège d'hommes au dîner sobre d'un collège de femmes. La pensée dépend des conditions matérielles.", k:"Le corps et l'argent conditionnent l'esprit.", ref:'ch. I'}
+  ],
+  [ /* II */
+    {t:'c', q:"Les femmes ont pendant des siècles servi aux hommes de miroirs, elles possédaient le pouvoir magique et délicieux de réfléchir une image de l'homme deux fois plus grande que nature.", ctx:"Au British Museum, la narratrice cherche pourquoi les hommes écrivent avec tant de colère sur les femmes. Le miroir flatte l'ego masculin.", k:"La femme comme miroir agrandissant.", ref:'ch. II'},
+    {t:'c', q:"Aucune puissance de ce monde ne peut m'enlever mes cinq cents livres.", ctx:"La narratrice hérite d'une rente de 500 livres par an, la même année que le droit de vote. Elle juge que cet argent a plus compté pour sa liberté.", k:"Indépendance financière, plus que le vote.", ref:'ch. II'}
+  ],
+  [ /* III */
+    {t:'cv', q:"Il eût été tout à fait impossible qu'une femme écrivît les pièces de Shakespeare à l'époque de Shakespeare.", ctx:"La narratrice imagine que Shakespeare avait une sœur, Judith, aussi douée que lui, pour montrer ce qui arrive à un génie féminin sans conditions matérielles.", k:"Le génie féminin existait, sans moyens de s'exprimer.", ref:'ch. III'},
+    {t:'i', q:"Judith, interdite d'école et mariée de force, s'enfuit à Londres, est abandonnée enceinte, se donne la mort et est enterrée à un carrefour.", ctx:"Récit inventé par la narratrice : le talent est le même, mais le destin est opposé à celui de son frère.", k:"Judith Shakespeare : fiction pour montrer l'obstacle social.", ref:'ch. III'}
+  ],
+  [ /* IV */
+    {t:'c', q:"Les chefs-d'œuvre ne sont pas nés seuls et dans la solitude ; ils sont le résultat de nombreuses années de pensées en commun, de pensées élaborées par l'esprit d'un peuple entier.", ctx:"En retraçant l'histoire des femmes qui ont écrit (Behn, Austen, Brontë, Eliot), la narratrice montre que le génie est aussi collectif.", k:"Création collective, contre le génie solitaire.", ref:'ch. IV'},
+    {t:'c', q:"L'argent confère la dignité à ce qui serait frivole si on ne le payait pas.", ctx:"À propos d'Aphra Behn, première femme à vivre de sa plume : l'écriture payée change le statut de l'activité des femmes.", k:"Argent = légitimité de l'écriture.", ref:'ch. IV, Aphra Behn'}
+  ],
+  [ /* V */
+    {t:'i', q:"Dans le roman imaginaire de Mary Carmichael, la phrase « Chloé aimait Olivia » marque une rupture.", ctx:"La narratrice y voit une première : une amitié entre deux femmes indépendante de leur rapport aux hommes.", k:"Nouvelle représentation des femmes en littérature.", ref:'ch. V'},
+    {t:'i', q:"L'écriture féminine moderne « casse la phrase » et « casse la séquence ».", ctx:"Écho au style de Woolf elle-même : les femmes ont besoin de formes qui ne soient pas héritées des hommes.", k:"Renouveler la forme, pas seulement le sujet.", ref:'ch. V'}
+  ],
+  [ /* VI */
+    {t:'c', q:"Cette poétesse qui n'a jamais écrit un mot et qui a été enterrée à ce carrefour est toujours vivante. Elle vit en moi, en vous… il leur suffit d'une occasion pour se manifester parmi nous en chair et en os.", ctx:"Conclusion du texte : la narratrice ressuscite Judith Shakespeare. Si les femmes obtiennent argent et lieu à elles, ce génie pourra renaître.", k:"Judith renaîtra si les conditions sont réunies.", ref:'ch. VI'},
+    {t:'c', q:"Il serait infiniment regrettable que les femmes écrivissent comme des hommes, car si deux sexes sont tout à fait suffisants quand on songe à l'étendue et à la diversité du monde, comment nous en tirerions-nous avec un seul ?", ctx:"Dans son appel final, la narratrice défend la diversité des voix, en lien avec l'idée d'esprit androgyne de Coleridge.", k:"Diversité des voix, esprit androgyne.", ref:'ch. VI'}
+  ]
+]
+
+};
+
+PLATON.ion.forEach((c,i)=> c.cits = CITS.platon_ion[i]);
+PLATON.republique.forEach((c,i)=> c.cits = CITS.platon_rep[i]);
+ZOLA.resume.forEach((c,i)=> c.cits = CITS.zola[i]);
+WOOLF.resume.forEach((c,i)=> c.cits = CITS.woolf[i]);
+
+/* ============================= RENDER ============================= */
+
+const WORKS = { platon: PLATON, zola: ZOLA, woolf: WOOLF };
+let current = 'home';
+
+function esc(s){ return s; } // content is already safe, kept for clarity
+
+function romanBadge(n){ return `<span class="roman">${n}</span>`; }
+
+function renderTabs(){
+  const tabs = document.getElementById('tabs');
+  const items = [
+    {key:'home', label:'Vue d\u2019ensemble', accent:null},
+    {key:'platon', label:'Platon', accent:'var(--gold)'},
+    {key:'zola', label:'Zola', accent:'var(--verdigris)'},
+    {key:'woolf', label:'Woolf', accent:'var(--plum)'},
+  ];
+  tabs.innerHTML = items.map(it => `
+    <button data-key="${it.key}" aria-current="${current===it.key}" style="${current===it.key && it.accent ? `--tab-accent:${it.accent}`:''}">
+      ${it.accent ? `<span class="dot" style="color:${it.accent}"></span>` : ''}${it.label}
+    </button>
+  `).join('');
+  tabs.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', ()=>{ go(b.dataset.key); });
+  });
+}
+
+function setAccent(work){
+  const root = document.documentElement.style;
+  if(!work){ root.setProperty('--accent','var(--gold)'); root.setProperty('--accent-soft','var(--gold-soft)'); root.setProperty('--accent-line','var(--gold-line)'); return; }
+  root.setProperty('--accent', `var(${work.accentVar})`);
+  root.setProperty('--accent-soft', `var(${work.accentVar}-soft)`);
+  root.setProperty('--accent-line', `var(${work.accentVar}-line)`);
+}
+
+function go(key){
+  current = key;
+  window.scrollTo({top:0, behavior:'auto'});
+  renderTabs();
+  if(key==='home'){ setAccent(null); renderHome(); }
+  else{ setAccent(WORKS[key]); renderWork(WORKS[key]); }
+}
+
+function renderHome(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <section class="hero">
+      <div class="eyebrow">Programme Lettres-Philosophie · CPGE scientifiques 2026-2028</div>
+      <h1>Les <em>Arcanes</em><br>de la Création</h1>
+      <p class="lead">Trois œuvres, trois réponses à une même énigme : d\u2019où vient la création, ce qu\u2019elle coûte, et à quelles conditions elle devient possible.</p>
+      <p class="meta">Platon — Ion & République X · Zola — L\u2019Œuvre · Woolf — Un lieu à soi</p>
+    </section>
+
+    <div class="seals">
+      <button class="seal s-platon" data-key="platon">
+        <div class="num">01 · Antiquité, IVᵉ s. av. J.-C.</div>
+        <h3>Ion & République X</h3>
+        <div class="who">Platon</div>
+        <div class="thesis">Le poète est un médiateur inspiré, sans savoir réel. La création imite l\u2019apparence, pas la vérité.</div>
+        <div class="go">Ouvrir la fiche →</div>
+      </button>
+      <button class="seal s-zola" data-key="zola">
+        <div class="num">02 · Roman, 1886</div>
+        <h3>L\u2019Œuvre</h3>
+        <div class="who">Émile Zola</div>
+        <div class="thesis">La création est une lutte physique et psychique qui peut détruire son auteur.</div>
+        <div class="go">Ouvrir la fiche →</div>
+      </button>
+      <button class="seal s-woolf" data-key="woolf">
+        <div class="num">03 · Essai, 1929</div>
+        <h3>Un lieu à soi</h3>
+        <div class="who">Virginia Woolf</div>
+        <div class="thesis">Pour créer, il faut de l\u2019argent et un lieu à soi — une question de conditions matérielles, pas de talent.</div>
+        <div class="go">Ouvrir la fiche →</div>
+      </button>
+    </div>
+
+    <div class="compare">
+      <div class="compare-head">Articulation des trois œuvres</div>
+      <table class="artic">
+        <tbody>
+          ${OVERVIEW.compare.map(r=>`
+            <tr class="row-${r.work}">
+              <th>${r.label}</th>
+              <td class="q">${r.q}</td>
+              <td class="t">${r.t}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-box">
+      <b>Pour la dissertation :</b> ne jamais traiter les trois œuvres séparément en trois parties. Construis ton plan autour d\u2019une tension conceptuelle (intérieur / extérieur, don / mérite, individu / société) et fais dialoguer les trois œuvres dans chaque partie.
+    </div>
+  `;
+  app.querySelectorAll('.seal').forEach(s=> s.addEventListener('click', ()=> go(s.dataset.key)));
+}
+
+function citBlock(list){
+  const lab = {c:'Citation', cv:'Citation · à vérifier mot à mot dans ton édition', i:'Idée clé · reformulation, pas une citation'};
+  return `<div class="cits"><div class="cits-h">Citations à retenir</div>${list.map(x=>`
+    <div class="cit cit-${x.t}">
+      <div class="cit-tag">${lab[x.t]}</div>
+      <div class="cit-q">${x.t==='i' ? x.q : '« '+x.q+' »'}</div>
+      <div class="cit-ctx"><b>Contexte</b>${x.ctx}</div>
+      <div class="cit-k"><b>À retenir</b>${x.k}</div>
+      <div class="cit-ref">${x.ref}</div>
+    </div>`).join('')}</div>`;
+}
+
+function chapterList(list){
+  return list.map(c=>`
+    <details class="chap">
+      <summary>
+        ${romanBadge(c.n)}
+        <span>${c.h}${c.t ? ` <span style="color:var(--paper-faint);font-weight:400;font-size:13px;font-family:var(--mono)">· ${c.t}</span>`:''}</span>
+        <span class="arrow">▸</span>
+      </summary>
+      <div class="chap-body">
+        <p>${c.p}</p>
+        ${c.cits ? citBlock(c.cits) : (c.q ? `<blockquote>« ${c.q} »<br><span style="opacity:.7;font-style:normal;font-family:var(--mono);font-size:11.5px">— ${c.qref}</span></blockquote>` : '')}
+      </div>
+    </details>
+  `).join('');
+}
+
+function axesList(list){
+  return `<div class="axes">${list.map((a,i)=>`
+    <div class="axis">
+      <div class="letter">${String.fromCharCode(97+i)}</div>
+      <h3>${a.t}</h3>
+      <p>${a.p}</p>
+    </div>
+  `).join('')}</div>`;
+}
+
+function citationGrid(list, id){
+  return `
+    <div class="filterbox">
+      <input type="text" id="filter-${id}" placeholder="Filtrer les citations (thème, mot-clé…)" autocomplete="off">
+    </div>
+    <div class="qgrid" id="qgrid-${id}">
+      ${list.map(q=>`
+        <div class="qcard" data-search="${(q.theme+' '+q.text+' '+q.ref).toLowerCase()}">
+          <div class="theme">${q.theme}${q.tag?`<span class="tag">${q.tag}</span>`:''}</div>
+          <div class="qtext">« ${q.text} »</div>
+          <div class="ref">${q.ref}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="no-results" id="noresults-${id}">Aucune citation ne correspond à ta recherche.</div>
+  `;
+}
+
+function attachFilter(id){
+  const input = document.getElementById(`filter-${id}`);
+  const cards = Array.from(document.querySelectorAll(`#qgrid-${id} .qcard`));
+  const noRes = document.getElementById(`noresults-${id}`);
+  input.addEventListener('input', ()=>{
+    const v = input.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach(c=>{
+      const match = c.dataset.search.includes(v);
+      c.hidden = !match;
+      if(match) shown++;
+    });
+    noRes.style.display = shown===0 ? 'block' : 'none';
+  });
+}
+
+function reperesList(list){
+  return `<div class="reperes">${list.map(r=>`
+    <div class="repere">
+      <div class="when">${r[0]}</div>
+      <div class="what">${r[1]}</div>
+    </div>
+  `).join('')}</div>`;
+}
+
+function renderWork(w){
+  const app = document.getElementById('app');
+
+  let body = `
+    <div class="work-band">
+      <div class="kicker">${w.key==='platon' ? 'Antiquité · IVᵉ s. av. J.-C.' : w.key==='zola' ? 'Roman · 1886' : 'Essai · 1929'}</div>
+      <h1>${w.workTitle}</h1>
+      <div class="who">${w.who}</div>
+      <div class="thesis">${w.thesis}</div>
+      <div class="facts">
+        ${w.facts.map(f=>`<div><b>${f[0]}</b>${f[1]}</div>`).join('')}
+      </div>
+    </div>
+    <div class="subnav"><div class="in">
+      ${w.subnav.map(s=>`<a href="#${s[0]}">${s[1]}</a>`).join('')}
+    </div></div>
+  `;
+
+  body += `<section class="block" id="presentation"><h2>Présentation</h2><div class="prose">${w.presentation}</div></section>`;
+
+  if(w.key==='platon'){
+    body += `<section class="block" id="ion">
+      <h2><span class="n">01</span> Ion</h2>
+      <div class="sub">Résumé structuré — dialogue étudié en entier</div>
+      ${chapterList(w.ion)}
+    </section>`;
+    body += `<section class="block" id="republique">
+      <h2><span class="n">02</span> La République, Livre X</h2>
+      <div class="sub">595a–608b uniquement — la critique de la poésie mimétique</div>
+      ${chapterList(w.republique)}
+    </section>`;
+  } else {
+    if(w.personnages){
+      body += `<section class="block" id="personnages"><h2>Personnages principaux</h2>
+        <table class="people">${w.personnages.map(p=>`<tr><td>${p[0]}</td><td></td><td>${p[1]}</td></tr>`).join('')}</table>
+      </section>`;
+    }
+    body += `<section class="block" id="resume">
+      <h2>Résumé ${w.key==='zola' ? '· 12 chapitres' : '· 6 chapitres'}</h2>
+      <div class="sub">Clique sur un chapitre pour l\u2019ouvrir</div>
+      ${chapterList(w.resume)}
+    </section>`;
+  }
+
+  body += `<section class="block" id="axes"><h2>Axes de lecture</h2><div class="sub">Pour la dissertation</div>${axesList(w.axes)}</section>`;
+  body += `<section class="block" id="citations"><h2>Citations</h2><div class="sub">Classées par thème — vérifie le mot à mot dans ton édition</div>${citationGrid(w.citations, w.key)}</section>`;
+
+  if(w.key==='platon'){
+    body += `<section class="block" id="concepts"><h2>Concepts</h2><div class="sub">Glossaire rapide</div>
+      <table class="gloss">${w.concepts.map(c=>`<tr><td>${c[0]}</td><td>${c[1]}</td></tr>`).join('')}</table>
+    </section>`;
+  }
+  if(w.key==='woolf'){
+    body += `<section class="block" id="figures"><h2>Figures convoquées</h2><div class="sub">Réelles et fictives</div>
+      <table class="people">${w.figures.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td></tr>`).join('')}</table>
+    </section>`;
+  }
+
+  body += `<section class="block" id="reperes"><h2>Repères</h2>${reperesList(w.reperes)}</section>`;
+
+  app.innerHTML = body;
+  attachFilter(w.key);
+}
+
+renderTabs();
+renderHome();
+</script>
+</body>
+</html>
